@@ -5,10 +5,10 @@ struct PointProperties
     float Thickness;
 };
 
-vec3 DrawPoint(vec2 Coords, PointProperties Prop)
+vec3 DrawPoint(vec2 Coords, vec3 BackBuffer, PointProperties Prop)
 {
     // Point SDF
     float SDF = length(Coords - Prop.Location);
     SDF = float(SDF < Prop.Thickness);
-    return Prop.Color.xyz * Prop.Color.w * SDF;
+    return mix(BackBuffer, Prop.Color.xyz, Prop.Color.w * SDF);
 }
